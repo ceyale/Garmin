@@ -4,7 +4,7 @@ import Toybox.Position;
 import Toybox.Sensor;
 import Toybox.System;
 import Toybox.Time;
-import Toybox.Time.Gregorian;
+import Toybox.Timer;
 import Toybox.WatchUi;
 
 class windsurfView extends WatchUi.View {
@@ -16,7 +16,6 @@ class windsurfView extends WatchUi.View {
     // Session data
     private var _startTime as Time.Moment?;
     private var _elapsedTime as Float = 0.0;
-    private var _lastUpdateTime as Time.Moment?;
     private var _currentSpeed as Float = 0.0;
     private var _maxSpeed as Float = 0.0;
     private var _distance as Float = 0.0;
@@ -80,7 +79,7 @@ class windsurfView extends WatchUi.View {
     }
 
     // Position callback - called when GPS position updates
-    function onPosition(info as Info) as Void {
+    function onPosition(info as Position.Info) as Void {
         if (!_sessionActive) {
             return;
         }
@@ -138,7 +137,6 @@ class windsurfView extends WatchUi.View {
         _sessionActive = true;
         _sessionStarted = true;
         _startTime = Time.now();
-        _lastUpdateTime = _startTime;
         _lastPosition = null;
         _elapsedTime = 0.0;
         _currentSpeed = 0.0;
@@ -165,7 +163,6 @@ class windsurfView extends WatchUi.View {
         _sessionActive = false;
         _sessionStarted = false;
         _startTime = null;
-        _lastUpdateTime = null;
         _lastPosition = null;
         _elapsedTime = 0.0;
         _currentSpeed = 0.0;
