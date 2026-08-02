@@ -15,6 +15,7 @@
         -->
         <iq:products>
             <iq:product id="fr245"/>
+            <iq:product id="fr745"/>
         </iq:products>
 
         <!--
