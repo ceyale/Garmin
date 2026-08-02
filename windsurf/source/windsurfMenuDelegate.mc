@@ -9,11 +9,18 @@ class windsurfMenuDelegate extends WatchUi.MenuInputDelegate {
     }
 
     function onMenuItem(item as Symbol) as Void {
-        if (item == :item_1) {
-            System.println("item 1");
-        } else if (item == :item_2) {
-            System.println("item 2");
+        var view = WatchUi.getCurrentView();
+        if (view[0] instanceof windsurfView) {
+            var windsurfViewObj = view[0] as windsurfView;
+            if (item == :item_start) {
+                windsurfViewObj.startSession();
+            } else if (item == :item_stop) {
+                windsurfViewObj.stopSession();
+            } else if (item == :item_reset) {
+                windsurfViewObj.resetSession();
+            }
         }
+        WatchUi.popView(WatchUi.SLIDE_DOWN);
     }
 
 }
