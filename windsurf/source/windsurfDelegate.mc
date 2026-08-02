@@ -12,4 +12,24 @@ class windsurfDelegate extends WatchUi.BehaviorDelegate {
         return true;
     }
 
+    // Start button on the watch
+    function onSelect() as Boolean {
+        var view = WatchUi.getCurrentView();
+        if (view[0] instanceof windsurfView) {
+            var windsurfViewObj = view[0] as windsurfView;
+            windsurfViewObj.startSession();
+        }
+        return true;
+    }
+
+    // Back button to stop the session
+    function onBack() as Boolean {
+        var view = WatchUi.getCurrentView();
+        if (view[0] instanceof windsurfView) {
+            var windsurfViewObj = view[0] as windsurfView;
+            windsurfViewObj.stopSession();
+        }
+        return true;
+    }
+
 }
