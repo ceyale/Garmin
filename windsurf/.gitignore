@@ -1,0 +1,10 @@
+# Build artifacts
+*.prg
+*.prg.debug.xml
+external-mir/
+internal-mir/
+gen/
+
+# Developer key (do not commit)
+developer_key
+developer_key.pem
