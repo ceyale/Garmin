@@ -1,0 +1,922 @@
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Graphics,1,14,22]; ]
+import Toybox.Graphics;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Lang,2,14,18]; ]
+import Toybox.Lang;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Position,3,14,22]; ]
+import Toybox.Position;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [Sensor,4,14,20]; ]
+import Toybox.Sensor;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 5; @symbol_importdef<0> = [Toybox,5,7,13]; @symbol_importdef<1> = [System,5,14,20]; ]
+import Toybox.System;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 6; @symbol_importdef<0> = [Toybox,6,7,13]; @symbol_importdef<1> = [Time,6,14,18]; ]
+import Toybox.Time;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 7; @symbol_importdef<0> = [Toybox,7,7,13]; @symbol_importdef<1> = [Timer,7,14,19]; ]
+import Toybox.Timer;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 8; @symbol_importdef<0> = [Toybox,8,7,13]; @symbol_importdef<1> = [WatchUi,8,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 10; @symbol_classdef = [windsurfView,10,6,18]; @symbol_extends<0> = [WatchUi,10,27,34]; @symbol_extends<1> = [View,10,35,39]; ]
+class windsurfView extends WatchUi.View {
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 10; ]
+    <init> {
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 10; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 13; @position = 16; @symbol_vardef = [_sessionActive,13,16,30]; @symbol_type<0> = [Boolean,13,34,41]; ]
+    private
+    var _sessionActive as Boolean = false;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 14; @position = 16; @symbol_vardef = [_sessionStarted,14,16,31]; @symbol_type<0> = [Boolean,14,35,42]; ]
+    private
+    var _sessionStarted as Boolean = false;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 17; @position = 16; @symbol_vardef = [_startTime,17,16,26]; @symbol_type<0> = [Time,17,30,34]; @symbol_type<1> = [Moment,17,35,41]; ]
+    private
+    var _startTime as Time.Moment or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 18; @position = 16; @symbol_vardef = [_elapsedTime,18,16,28]; @symbol_type<0> = [Float,18,32,37]; ]
+    private
+    var _elapsedTime as Float = 0.0;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 19; @position = 16; @symbol_vardef = [_currentSpeed,19,16,29]; @symbol_type<0> = [Float,19,33,38]; ]
+    private
+    var _currentSpeed as Float = 0.0;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 20; @position = 16; @symbol_vardef = [_maxSpeed,20,16,25]; @symbol_type<0> = [Float,20,29,34]; ]
+    private
+    var _maxSpeed as Float = 0.0;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 21; @position = 16; @symbol_vardef = [_distance,21,16,25]; @symbol_type<0> = [Float,21,29,34]; ]
+    private
+    var _distance as Float = 0.0;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 22; @position = 16; @symbol_vardef = [_lastPosition,22,16,29]; @symbol_type<0> = [Position,22,33,41]; @symbol_type<1> = [Location,22,42,50]; ]
+    private
+    var _lastPosition as Position.Location or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 25; @position = 16; @symbol_vardef = [_statusLabel,25,16,28]; @symbol_type<0> = [WatchUi,25,32,39]; @symbol_type<1> = [Text,25,40,44]; ]
+    private
+    var _statusLabel as WatchUi.Text or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 26; @position = 16; @symbol_vardef = [_speedLabel,26,16,27]; @symbol_type<0> = [WatchUi,26,31,38]; @symbol_type<1> = [Text,26,39,43]; ]
+    private
+    var _speedLabel as WatchUi.Text or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 27; @position = 16; @symbol_vardef = [_maxSpeedLabel,27,16,30]; @symbol_type<0> = [WatchUi,27,34,41]; @symbol_type<1> = [Text,27,42,46]; ]
+    private
+    var _maxSpeedLabel as WatchUi.Text or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 28; @position = 16; @symbol_vardef = [_distanceLabel,28,16,30]; @symbol_type<0> = [WatchUi,28,34,41]; @symbol_type<1> = [Text,28,42,46]; ]
+    private
+    var _distanceLabel as WatchUi.Text or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 29; @position = 16; @symbol_vardef = [_timeLabel,29,16,26]; @symbol_type<0> = [WatchUi,29,30,37]; @symbol_type<1> = [Text,29,38,42]; ]
+    private
+    var _timeLabel as WatchUi.Text or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 32; @position = 16; @symbol_vardef = [_timer,32,16,22]; @symbol_type<0> = [Timer,32,26,31]; @symbol_type<1> = [Timer,32,32,37]; ]
+    private
+    var _timer as Timer.Timer or Null;
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 34; @symbol_functiondef = [initialize,34,13,23]; ]
+    function initialize() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_34_26_36_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 35 8 ]
+        symbol [ View %tmp.2 35 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 35 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_34_26_36_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 39; @symbol_functiondef = [onLayout,39,13,21]; @symbol_param<0> = [dc,39,22,24]; @symbol_param<0>_type<0> = [Dc,39,28,30]; ]
+    function onLayout(dc as Dc) as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_39_40_47_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 40 8 ]
+        %tmp.1 = self;
+        symbol [ setLayout %tmp.2 40 8 17 ];
+        %tmp.2 = getv function %tmp.1 :setLayout;
+        symbol [ Rez %tmp.4 40 18 21 ];
+        %tmp.4 = getv ? :Rez;
+        symbol [ Layouts %tmp.5 40 22 29 ];
+        %tmp.5 = getv %tmp.4 :Layouts;
+        symbol [ MainLayout %tmp.6 40 30 40 ];
+        %tmp.6 = getv function %tmp.5 :MainLayout;
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 40 41 43 ];
+        %tmp.8 = invoke %tmp.5 %tmp.6(%tmp.7);
+        invoke %tmp.1 %tmp.2(%tmp.8);
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 42 8 ]
+        symbol [ View %tmp.10 42 23 27 ];
+        %tmp.10 = getv ? :View;
+        symbol [ findDrawableById %tmp.11 42 28 44 ];
+        %tmp.11 = getv function %tmp.10 :findDrawableById;
+        %tmp.12 = "id_status";
+        %tmp.13 = invoke %tmp.10 %tmp.11(%tmp.12);
+        %tmp.14 = as %tmp.13 WatchUi.Text;
+        symbol [ WatchUi %tmp.14 42 61 68 ];
+        symbol [ Text %tmp.14 42 69 73 ];
+        symbol [ _statusLabel ? 42 8 20 ];
+        putv self :_statusLabel %tmp.14;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 43 8 ]
+        symbol [ View %tmp.16 43 22 26 ];
+        %tmp.16 = getv ? :View;
+        symbol [ findDrawableById %tmp.17 43 27 43 ];
+        %tmp.17 = getv function %tmp.16 :findDrawableById;
+        %tmp.18 = "id_speed";
+        %tmp.19 = invoke %tmp.16 %tmp.17(%tmp.18);
+        %tmp.20 = as %tmp.19 WatchUi.Text;
+        symbol [ WatchUi %tmp.20 43 59 66 ];
+        symbol [ Text %tmp.20 43 67 71 ];
+        symbol [ _speedLabel ? 43 8 19 ];
+        putv self :_speedLabel %tmp.20;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 44 8 ]
+        symbol [ View %tmp.22 44 25 29 ];
+        %tmp.22 = getv ? :View;
+        symbol [ findDrawableById %tmp.23 44 30 46 ];
+        %tmp.23 = getv function %tmp.22 :findDrawableById;
+        %tmp.24 = "id_max_speed";
+        %tmp.25 = invoke %tmp.22 %tmp.23(%tmp.24);
+        %tmp.26 = as %tmp.25 WatchUi.Text;
+        symbol [ WatchUi %tmp.26 44 66 73 ];
+        symbol [ Text %tmp.26 44 74 78 ];
+        symbol [ _maxSpeedLabel ? 44 8 22 ];
+        putv self :_maxSpeedLabel %tmp.26;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 45 8 ]
+        symbol [ View %tmp.28 45 25 29 ];
+        %tmp.28 = getv ? :View;
+        symbol [ findDrawableById %tmp.29 45 30 46 ];
+        %tmp.29 = getv function %tmp.28 :findDrawableById;
+        %tmp.30 = "id_distance";
+        %tmp.31 = invoke %tmp.28 %tmp.29(%tmp.30);
+        %tmp.32 = as %tmp.31 WatchUi.Text;
+        symbol [ WatchUi %tmp.32 45 65 72 ];
+        symbol [ Text %tmp.32 45 73 77 ];
+        symbol [ _distanceLabel ? 45 8 22 ];
+        putv self :_distanceLabel %tmp.32;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 46 8 ]
+        symbol [ View %tmp.34 46 21 25 ];
+        %tmp.34 = getv ? :View;
+        symbol [ findDrawableById %tmp.35 46 26 42 ];
+        %tmp.35 = getv function %tmp.34 :findDrawableById;
+        %tmp.36 = "id_time";
+        %tmp.37 = invoke %tmp.34 %tmp.35(%tmp.36);
+        %tmp.38 = as %tmp.37 WatchUi.Text;
+        symbol [ WatchUi %tmp.38 46 57 64 ];
+        symbol [ Text %tmp.38 46 65 69 ];
+        symbol [ _timeLabel ? 46 8 18 ];
+        putv self :_timeLabel %tmp.38;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_39_40_47_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 52; @symbol_functiondef = [onShow,52,13,19]; ]
+    function onShow() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_52_30_61_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 54 8 ]
+        symbol [ Position %tmp.1 54 8 16 ];
+        %tmp.1 = getm $.Toybox.Position;
+        symbol [ enableLocationEvents %tmp.2 54 17 37 ];
+        %tmp.2 = getv function %tmp.1 :enableLocationEvents;
+        symbol [ Position %tmp.3 54 38 46 ];
+        %tmp.3 = getm $.Toybox.Position;
+        symbol [ LOCATION_CONTINUOUS %tmp.4 54 47 66 ];
+        %tmp.4 = getv %tmp.3 :LOCATION_CONTINUOUS;
+        %tmp.5 = self;
+        symbol [ method %tmp.6 54 68 74 ];
+        %tmp.6 = getv function %tmp.5 :method;
+        %tmp.8 = const :onPosition;
+        symbol [ onPosition %tmp.8 54 76 86 const ];
+        %tmp.9 = invoke %tmp.5 %tmp.6(%tmp.8);
+        invoke %tmp.1 %tmp.2(%tmp.4, %tmp.9);
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 55 8 ]
+        symbol [ Sensor %tmp.10 55 8 14 ];
+        %tmp.10 = getm $.Toybox.Sensor;
+        symbol [ setEnabledSensors %tmp.11 55 15 32 ];
+        %tmp.11 = getv function %tmp.10 :setEnabledSensors;
+        symbol [ Sensor %tmp.12 55 33 39 ];
+        %tmp.12 = getm $.Toybox.Sensor;
+        symbol [ SENSOR_ACCELEROMETER %tmp.13 55 40 60 ];
+        %tmp.13 = getv %tmp.12 :SENSOR_ACCELEROMETER;
+        invoke %tmp.10 %tmp.11(%tmp.13);
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 56 8 ]
+        symbol [ Sensor %tmp.14 56 8 14 ];
+        %tmp.14 = getm $.Toybox.Sensor;
+        symbol [ enableSensorEvents %tmp.15 56 15 33 ];
+        %tmp.15 = getv function %tmp.14 :enableSensorEvents;
+        %tmp.16 = self;
+        symbol [ method %tmp.17 56 34 40 ];
+        %tmp.17 = getv function %tmp.16 :method;
+        %tmp.19 = const :onSensor;
+        symbol [ onSensor %tmp.19 56 42 50 const ];
+        %tmp.20 = invoke %tmp.16 %tmp.17(%tmp.19);
+        invoke %tmp.14 %tmp.15(%tmp.20);
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 59 8 ]
+        symbol [ Timer %tmp.23 59 21 26 ];
+        %tmp.23 = getm $.Toybox.Timer;
+        symbol [ Timer %tmp.24 59 27 32 ];
+        %tmp.24 = getv function ? %tmp.23 :Timer;
+        %tmp.21 = newc %tmp.24 ();
+        symbol [ _timer ? 59 8 14 ];
+        putv self :_timer %tmp.21;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 60 8 ]
+        symbol [ _timer %tmp.26 60 8 14 ];
+        %tmp.26 = getv ? :_timer;
+        symbol [ start %tmp.27 60 15 20 ];
+        %tmp.27 = getv function %tmp.26 :start;
+        %tmp.28 = self;
+        symbol [ method %tmp.29 60 21 27 ];
+        %tmp.29 = getv function %tmp.28 :method;
+        %tmp.31 = const :onTimer;
+        symbol [ onTimer %tmp.31 60 29 36 const ];
+        %tmp.32 = invoke %tmp.28 %tmp.29(%tmp.31);
+        %tmp.33 = 1000;
+        %tmp.34 = true;
+        invoke %tmp.26 %tmp.27(%tmp.32, %tmp.33, %tmp.34);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_52_30_61_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 64; @symbol_functiondef = [onUpdate,64,13,21]; @symbol_param<0> = [dc,64,22,24]; @symbol_param<0>_type<0> = [Dc,64,28,30]; ]
+    function onUpdate(dc as Dc) as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_64_40_67_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 66 8 ]
+        symbol [ View %tmp.2 66 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ onUpdate %tmp.3 66 13 21 ];
+        %tmp.3 = getv function %tmp.2 :onUpdate;
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 66 22 24 ];
+        invoke %tmp.2 %tmp.3(%tmp.4);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_64_40_67_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 72; @symbol_functiondef = [onHide,72,13,19]; ]
+    function onHide() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_72_30_79_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 73 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_8_76_8_if_stmt:
+        symbol [ _timer %tmp.2 73 12 18 ];
+        %tmp.2 = getv ? :_timer;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_8_76_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_8_76_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_28_76_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 74 12 ]
+        symbol [ _timer %tmp.6 74 12 18 ];
+        %tmp.6 = getv ? :_timer;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        symbol [ stop %tmp.8 74 19 23 ];
+        %tmp.8 = getv function %tmp.7 :stop;
+        invoke %tmp.7 %tmp.8();
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 75 12 ]
+        %tmp.9 = null;
+        symbol [ _timer ? 75 12 18 ];
+        putv self :_timer %tmp.9;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_28_76_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_8_76_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_73_8_76_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 77 8 ]
+        symbol [ Position %tmp.10 77 8 16 ];
+        %tmp.10 = getm $.Toybox.Position;
+        symbol [ enableLocationEvents %tmp.11 77 17 37 ];
+        %tmp.11 = getv function %tmp.10 :enableLocationEvents;
+        symbol [ Position %tmp.12 77 38 46 ];
+        %tmp.12 = getm $.Toybox.Position;
+        symbol [ LOCATION_OFF %tmp.13 77 47 59 ];
+        %tmp.13 = getv %tmp.12 :LOCATION_OFF;
+        %tmp.14 = self;
+        symbol [ method %tmp.15 77 61 67 ];
+        %tmp.15 = getv function %tmp.14 :method;
+        %tmp.17 = const :onPosition;
+        symbol [ onPosition %tmp.17 77 69 79 const ];
+        %tmp.18 = invoke %tmp.14 %tmp.15(%tmp.17);
+        invoke %tmp.10 %tmp.11(%tmp.13, %tmp.18);
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 78 8 ]
+        symbol [ Sensor %tmp.19 78 8 14 ];
+        %tmp.19 = getm $.Toybox.Sensor;
+        symbol [ setEnabledSensors %tmp.20 78 15 32 ];
+        %tmp.20 = getv function %tmp.19 :setEnabledSensors;
+        symbol [ Sensor %tmp.21 78 33 39 ];
+        %tmp.21 = getm $.Toybox.Sensor;
+        symbol [ SENSOR_OFF %tmp.22 78 40 50 ];
+        %tmp.22 = getv %tmp.21 :SENSOR_OFF;
+        invoke %tmp.19 %tmp.20(%tmp.22);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_72_30_79_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 82; @symbol_functiondef = [onPosition,82,13,23]; @symbol_param<0> = [info,82,24,28]; @symbol_param<0>_type<0> = [Position,82,32,40]; @symbol_param<0>_type<1> = [Info,82,41,45]; ]
+    function onPosition(info as Position.Info) as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 83 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_8_85_8_if_stmt:
+        symbol [ _sessionActive %tmp.2 83 13 27 ];
+        %tmp.2 = getv ? :_sessionActive;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_8_85_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_8_85_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_29_85_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 84 12 ]
+        ret ?;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_29_85_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_8_85_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_83_8_85_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 87 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_stop" ]
+        %loc.1 = local;
+        symbol [ loc %loc.1 87 12 15 ];
+        %tmp.4 = lgetv %info;
+        symbol [ info %tmp.4 87 18 22 ];
+        symbol [ position %tmp.5 87 23 31 ];
+        %tmp.5 = getv %tmp.4 :position;
+        lputv %loc.1 %tmp.5;
+        symbol [ loc %loc.1 87 12 15 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 88 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_8_90_8_if_stmt:
+        %tmp.6 = lgetv %loc.1;
+        symbol [ loc %tmp.6 88 12 15 ];
+        %tmp.7 = null;
+        %tmp.8 = eq %tmp.6 %tmp.7;
+        bf %tmp.8 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_8_90_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_8_90_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_25_90_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 89 12 ]
+        ret ?;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_25_90_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_8_90_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_88_8_90_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 93 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_stop" ]
+        %speed.2 = local;
+        symbol [ speed %speed.2 93 12 17 ];
+        %tmp.9 = lgetv %info;
+        symbol [ info %tmp.9 93 20 24 ];
+        symbol [ speed %tmp.10 93 25 30 ];
+        %tmp.10 = getv %tmp.9 :speed;
+        lputv %speed.2 %tmp.10;
+        symbol [ speed %speed.2 93 12 17 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 94 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_8_99_8_if_stmt:
+        %tmp.11 = lgetv %speed.2;
+        symbol [ speed %tmp.11 94 12 17 ];
+        %tmp.12 = null;
+        %tmp.13 = ne %tmp.11 %tmp.12;
+        bf %tmp.13 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_8_99_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_8_99_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_27_99_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 95 12 ]
+        %tmp.14 = lgetv %speed.2;
+        symbol [ speed %tmp.14 95 28 33 ];
+        %tmp.15 = as %tmp.14 { (!Null) };
+        symbol [ toFloat %tmp.16 95 34 41 ];
+        %tmp.16 = getv function %tmp.15 :toFloat;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        %tmp.18 = 3.6;
+        %tmp.19 = mul %tmp.17 %tmp.18;
+        symbol [ _currentSpeed ? 95 12 25 ];
+        putv self :_currentSpeed %tmp.19;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 96 12 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_12_98_12_if_stmt:
+        symbol [ _currentSpeed %tmp.21 96 16 29 ];
+        %tmp.21 = getv ? :_currentSpeed;
+        symbol [ _maxSpeed %tmp.23 96 32 41 ];
+        %tmp.23 = getv ? :_maxSpeed;
+        %tmp.24 = gt %tmp.21 %tmp.23;
+        bf %tmp.24 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_12_98_12_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_12_98_12_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_43_98_12_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 97 16 ]
+        symbol [ _currentSpeed %tmp.26 97 28 41 ];
+        %tmp.26 = getv ? :_currentSpeed;
+        symbol [ _maxSpeed ? 97 16 25 ];
+        putv self :_maxSpeed %tmp.26;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_43_98_12_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_12_98_12_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_96_12_98_12_if_end:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_27_99_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_8_99_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_94_8_99_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 102 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_8_107_8_if_stmt:
+        symbol [ _lastPosition %tmp.28 102 12 25 ];
+        %tmp.28 = getv ? :_lastPosition;
+        %tmp.29 = null;
+        %tmp.30 = ne %tmp.28 %tmp.29;
+        bf %tmp.30 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_8_107_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_8_107_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_35_107_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 103 12 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_35_107_8_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_35_107_8_stop" ]
+        %distance.3 = local;
+        symbol [ distance %distance.3 103 16 24 ];
+        symbol [ _lastPosition %tmp.32 103 27 40 ];
+        %tmp.32 = getv ? :_lastPosition;
+        %tmp.33 = as %tmp.32 { (!Null) };
+        symbol [ distanceTo %tmp.34 103 41 51 ];
+        %tmp.34 = getv function %tmp.33 :distanceTo;
+        %tmp.35 = lgetv %loc.1;
+        symbol [ loc %tmp.35 103 52 55 ];
+        %tmp.36 = invoke %tmp.33 %tmp.34(%tmp.35);
+        lputv %distance.3 %tmp.36;
+        symbol [ distance %distance.3 103 16 24 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 104 12 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_12_106_12_if_stmt:
+        %tmp.37 = lgetv %distance.3;
+        symbol [ distance %tmp.37 104 16 24 ];
+        %tmp.38 = null;
+        %tmp.39 = ne %tmp.37 %tmp.38;
+        bf %tmp.39 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_12_106_12_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_12_106_12_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_34_106_12_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 105 16 ]
+        symbol [ _distance %tmp.40 105 16 25 ];
+        %tmp.40 = getv self :_distance;
+        %tmp.41 = lgetv %distance.3;
+        symbol [ distance %tmp.41 105 29 37 ];
+        %tmp.42 = as %tmp.41 { (!Null) };
+        symbol [ toFloat %tmp.43 105 38 45 ];
+        %tmp.43 = getv function %tmp.42 :toFloat;
+        %tmp.44 = invoke %tmp.42 %tmp.43();
+        %tmp.45 = 1000.0;
+        %tmp.46 = div %tmp.44 %tmp.45;
+        %tmp.47 = add %tmp.40 %tmp.46;
+        symbol [ _distance ? 105 16 25 ];
+        putv self :_distance dup %tmp.47;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_34_106_12_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_12_106_12_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_104_12_106_12_if_end:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_35_107_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_8_107_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_102_8_107_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 108 8 ]
+        %tmp.48 = lgetv %loc.1;
+        symbol [ loc %tmp.48 108 24 27 ];
+        symbol [ _lastPosition ? 108 8 21 ];
+        putv self :_lastPosition %tmp.48;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 111 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_stop" ]
+        %now.4 = local;
+        symbol [ now %now.4 111 12 15 ];
+        symbol [ Time %tmp.49 111 18 22 ];
+        %tmp.49 = getm $.Toybox.Time;
+        symbol [ now %tmp.50 111 23 26 ];
+        %tmp.50 = getv function %tmp.49 :now;
+        %tmp.51 = invoke %tmp.49 %tmp.50();
+        lputv %now.4 %tmp.51;
+        symbol [ now %now.4 111 12 15 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 112 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_8_114_8_if_stmt:
+        symbol [ _startTime %tmp.53 112 12 22 ];
+        %tmp.53 = getv ? :_startTime;
+        %tmp.54 = null;
+        %tmp.55 = ne %tmp.53 %tmp.54;
+        bf %tmp.55 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_8_114_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_8_114_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_32_114_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 113 12 ]
+        %tmp.56 = lgetv %now.4;
+        symbol [ now %tmp.56 113 27 30 ];
+        symbol [ subtract %tmp.57 113 31 39 ];
+        %tmp.57 = getv function %tmp.56 :subtract;
+        symbol [ _startTime %tmp.59 113 40 50 ];
+        %tmp.59 = getv ? :_startTime;
+        %tmp.60 = as %tmp.59 { (!Null) };
+        %tmp.61 = invoke %tmp.56 %tmp.57(%tmp.60);
+        symbol [ value %tmp.62 113 52 57 ];
+        %tmp.62 = getv function %tmp.61 :value;
+        %tmp.63 = invoke %tmp.61 %tmp.62();
+        symbol [ toFloat %tmp.64 113 60 67 ];
+        %tmp.64 = getv function %tmp.63 :toFloat;
+        %tmp.65 = invoke %tmp.63 %tmp.64();
+        symbol [ _elapsedTime ? 113 12 24 ];
+        putv self :_elapsedTime %tmp.65;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_32_114_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_8_114_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_112_8_114_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 116 8 ]
+        %tmp.66 = self;
+        symbol [ updateDisplay %tmp.67 116 8 21 ];
+        %tmp.67 = getv function %tmp.66 :updateDisplay;
+        invoke %tmp.66 %tmp.67();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_82_55_117_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 120; @symbol_functiondef = [onSensor,120,13,21]; @symbol_param<0> = [sensorInfo,120,22,32]; @symbol_param<0>_type<0> = [Sensor,120,36,42]; @symbol_param<0>_type<1> = [Info,120,43,47]; ]
+    function onSensor(sensorInfo as Sensor.Info) as Void {
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 125; @symbol_functiondef = [onTimer,125,13,20]; ]
+    function onTimer() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_125_31_133_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 126 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_8_132_8_if_stmt:
+        symbol [ _sessionActive %tmp.2 126 12 26 ];
+        %tmp.2 = getv ? :_sessionActive;
+        bf %tmp.2 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_8_132_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_8_132_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_28_132_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 127 12 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_28_132_8_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_28_132_8_stop" ]
+        %now.1 = local;
+        symbol [ now %now.1 127 16 19 ];
+        symbol [ Time %tmp.3 127 22 26 ];
+        %tmp.3 = getm $.Toybox.Time;
+        symbol [ now %tmp.4 127 27 30 ];
+        %tmp.4 = getv function %tmp.3 :now;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        lputv %now.1 %tmp.5;
+        symbol [ now %now.1 127 16 19 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 128 12 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_12_130_12_if_stmt:
+        symbol [ _startTime %tmp.7 128 16 26 ];
+        %tmp.7 = getv ? :_startTime;
+        %tmp.8 = null;
+        %tmp.9 = ne %tmp.7 %tmp.8;
+        bf %tmp.9 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_12_130_12_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_12_130_12_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_36_130_12_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 129 16 ]
+        %tmp.10 = lgetv %now.1;
+        symbol [ now %tmp.10 129 31 34 ];
+        symbol [ subtract %tmp.11 129 35 43 ];
+        %tmp.11 = getv function %tmp.10 :subtract;
+        symbol [ _startTime %tmp.13 129 44 54 ];
+        %tmp.13 = getv ? :_startTime;
+        %tmp.14 = as %tmp.13 { (!Null) };
+        %tmp.15 = invoke %tmp.10 %tmp.11(%tmp.14);
+        symbol [ value %tmp.16 129 56 61 ];
+        %tmp.16 = getv function %tmp.15 :value;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        symbol [ toFloat %tmp.18 129 64 71 ];
+        %tmp.18 = getv function %tmp.17 :toFloat;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        symbol [ _elapsedTime ? 129 16 28 ];
+        putv self :_elapsedTime %tmp.19;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_36_130_12_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_12_130_12_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_128_12_130_12_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 131 12 ]
+        %tmp.20 = self;
+        symbol [ updateDisplay %tmp.21 131 12 25 ];
+        %tmp.21 = getv function %tmp.20 :updateDisplay;
+        invoke %tmp.20 %tmp.21();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_28_132_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_8_132_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_126_8_132_8_if_end:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_125_31_133_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 136; @symbol_functiondef = [startSession,136,13,25]; ]
+    function startSession() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_136_36_150_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 137 8 ]
+        %tmp.1 = true;
+        symbol [ _sessionActive ? 137 8 22 ];
+        putv self :_sessionActive %tmp.1;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 138 8 ]
+        %tmp.2 = true;
+        symbol [ _sessionStarted ? 138 8 23 ];
+        putv self :_sessionStarted %tmp.2;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 139 8 ]
+        symbol [ Time %tmp.3 139 21 25 ];
+        %tmp.3 = getm $.Toybox.Time;
+        symbol [ now %tmp.4 139 26 29 ];
+        %tmp.4 = getv function %tmp.3 :now;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        symbol [ _startTime ? 139 8 18 ];
+        putv self :_startTime %tmp.5;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 140 8 ]
+        %tmp.6 = null;
+        symbol [ _lastPosition ? 140 8 21 ];
+        putv self :_lastPosition %tmp.6;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 141 8 ]
+        %tmp.7 = 0.0;
+        symbol [ _elapsedTime ? 141 8 20 ];
+        putv self :_elapsedTime %tmp.7;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 142 8 ]
+        %tmp.8 = 0.0;
+        symbol [ _currentSpeed ? 142 8 21 ];
+        putv self :_currentSpeed %tmp.8;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 143 8 ]
+        %tmp.9 = 0.0;
+        symbol [ _maxSpeed ? 143 8 17 ];
+        putv self :_maxSpeed %tmp.9;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 144 8 ]
+        %tmp.10 = 0.0;
+        symbol [ _distance ? 144 8 17 ];
+        putv self :_distance %tmp.10;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 146 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_8_148_8_if_stmt:
+        symbol [ _statusLabel %tmp.12 146 12 24 ];
+        %tmp.12 = getv ? :_statusLabel;
+        %tmp.13 = null;
+        %tmp.14 = ne %tmp.12 %tmp.13;
+        bf %tmp.14 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_8_148_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_8_148_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_34_148_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 147 12 ]
+        symbol [ _statusLabel %tmp.16 147 12 24 ];
+        %tmp.16 = getv ? :_statusLabel;
+        %tmp.17 = as %tmp.16 { (!Null) };
+        symbol [ setText %tmp.18 147 25 32 ];
+        %tmp.18 = getv function %tmp.17 :setText;
+        symbol [ Rez %tmp.20 147 33 36 ];
+        %tmp.20 = getv ? :Rez;
+        symbol [ Strings %tmp.21 147 37 44 ];
+        %tmp.21 = getv %tmp.20 :Strings;
+        symbol [ status_active %tmp.22 147 45 58 ];
+        %tmp.22 = getv %tmp.21 :status_active;
+        invoke %tmp.17 %tmp.18(%tmp.22);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_34_148_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_8_148_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_146_8_148_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 149 8 ]
+        %tmp.23 = self;
+        symbol [ updateDisplay %tmp.24 149 8 21 ];
+        %tmp.24 = getv function %tmp.23 :updateDisplay;
+        invoke %tmp.23 %tmp.24();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_136_36_150_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 153; @symbol_functiondef = [stopSession,153,13,24]; ]
+    function stopSession() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_153_35_159_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 154 8 ]
+        %tmp.1 = false;
+        symbol [ _sessionActive ? 154 8 22 ];
+        putv self :_sessionActive %tmp.1;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 155 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_8_157_8_if_stmt:
+        symbol [ _statusLabel %tmp.3 155 12 24 ];
+        %tmp.3 = getv ? :_statusLabel;
+        %tmp.4 = null;
+        %tmp.5 = ne %tmp.3 %tmp.4;
+        bf %tmp.5 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_8_157_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_8_157_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_34_157_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 156 12 ]
+        symbol [ _statusLabel %tmp.7 156 12 24 ];
+        %tmp.7 = getv ? :_statusLabel;
+        %tmp.8 = as %tmp.7 { (!Null) };
+        symbol [ setText %tmp.9 156 25 32 ];
+        %tmp.9 = getv function %tmp.8 :setText;
+        symbol [ Rez %tmp.11 156 33 36 ];
+        %tmp.11 = getv ? :Rez;
+        symbol [ Strings %tmp.12 156 37 44 ];
+        %tmp.12 = getv %tmp.11 :Strings;
+        symbol [ status_stopped %tmp.13 156 45 59 ];
+        %tmp.13 = getv %tmp.12 :status_stopped;
+        invoke %tmp.8 %tmp.9(%tmp.13);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_34_157_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_8_157_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_155_8_157_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 158 8 ]
+        %tmp.14 = self;
+        symbol [ updateDisplay %tmp.15 158 8 21 ];
+        %tmp.15 = getv function %tmp.14 :updateDisplay;
+        invoke %tmp.14 %tmp.15();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_153_35_159_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 162; @symbol_functiondef = [resetSession,162,13,25]; ]
+    function resetSession() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_162_36_176_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 163 8 ]
+        %tmp.1 = false;
+        symbol [ _sessionActive ? 163 8 22 ];
+        putv self :_sessionActive %tmp.1;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 164 8 ]
+        %tmp.2 = false;
+        symbol [ _sessionStarted ? 164 8 23 ];
+        putv self :_sessionStarted %tmp.2;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 165 8 ]
+        %tmp.3 = null;
+        symbol [ _startTime ? 165 8 18 ];
+        putv self :_startTime %tmp.3;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 166 8 ]
+        %tmp.4 = null;
+        symbol [ _lastPosition ? 166 8 21 ];
+        putv self :_lastPosition %tmp.4;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 167 8 ]
+        %tmp.5 = 0.0;
+        symbol [ _elapsedTime ? 167 8 20 ];
+        putv self :_elapsedTime %tmp.5;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 168 8 ]
+        %tmp.6 = 0.0;
+        symbol [ _currentSpeed ? 168 8 21 ];
+        putv self :_currentSpeed %tmp.6;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 169 8 ]
+        %tmp.7 = 0.0;
+        symbol [ _maxSpeed ? 169 8 17 ];
+        putv self :_maxSpeed %tmp.7;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 170 8 ]
+        %tmp.8 = 0.0;
+        symbol [ _distance ? 170 8 17 ];
+        putv self :_distance %tmp.8;
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 172 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_8_174_8_if_stmt:
+        symbol [ _statusLabel %tmp.10 172 12 24 ];
+        %tmp.10 = getv ? :_statusLabel;
+        %tmp.11 = null;
+        %tmp.12 = ne %tmp.10 %tmp.11;
+        bf %tmp.12 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_8_174_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_8_174_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_34_174_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 173 12 ]
+        symbol [ _statusLabel %tmp.14 173 12 24 ];
+        %tmp.14 = getv ? :_statusLabel;
+        %tmp.15 = as %tmp.14 { (!Null) };
+        symbol [ setText %tmp.16 173 25 32 ];
+        %tmp.16 = getv function %tmp.15 :setText;
+        symbol [ Rez %tmp.18 173 33 36 ];
+        %tmp.18 = getv ? :Rez;
+        symbol [ Strings %tmp.19 173 37 44 ];
+        %tmp.19 = getv %tmp.18 :Strings;
+        symbol [ status_ready %tmp.20 173 45 57 ];
+        %tmp.20 = getv %tmp.19 :status_ready;
+        invoke %tmp.15 %tmp.16(%tmp.20);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_34_174_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_8_174_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_172_8_174_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 175 8 ]
+        %tmp.21 = self;
+        symbol [ updateDisplay %tmp.22 175 8 21 ];
+        %tmp.22 = getv function %tmp.21 :updateDisplay;
+        invoke %tmp.21 %tmp.22();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_162_36_176_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 179; @symbol_functiondef = [updateDisplay,179,21,34]; ]
+    private
+    function updateDisplay() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_179_45_193_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 180 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_8_182_8_if_stmt:
+        symbol [ _speedLabel %tmp.2 180 12 23 ];
+        %tmp.2 = getv ? :_speedLabel;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_8_182_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_8_182_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_33_182_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 181 12 ]
+        symbol [ _speedLabel %tmp.6 181 12 23 ];
+        %tmp.6 = getv ? :_speedLabel;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        symbol [ setText %tmp.8 181 24 31 ];
+        %tmp.8 = getv function %tmp.7 :setText;
+        %tmp.9 = self;
+        symbol [ formatSpeed %tmp.10 181 32 43 ];
+        %tmp.10 = getv function %tmp.9 :formatSpeed;
+        symbol [ _currentSpeed %tmp.12 181 44 57 ];
+        %tmp.12 = getv ? :_currentSpeed;
+        %tmp.13 = invoke %tmp.9 %tmp.10(%tmp.12);
+        invoke %tmp.7 %tmp.8(%tmp.13);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_33_182_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_8_182_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_180_8_182_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 183 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_8_185_8_if_stmt:
+        symbol [ _maxSpeedLabel %tmp.15 183 12 26 ];
+        %tmp.15 = getv ? :_maxSpeedLabel;
+        %tmp.16 = null;
+        %tmp.17 = ne %tmp.15 %tmp.16;
+        bf %tmp.17 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_8_185_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_8_185_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_36_185_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 184 12 ]
+        symbol [ _maxSpeedLabel %tmp.19 184 12 26 ];
+        %tmp.19 = getv ? :_maxSpeedLabel;
+        %tmp.20 = as %tmp.19 { (!Null) };
+        symbol [ setText %tmp.21 184 27 34 ];
+        %tmp.21 = getv function %tmp.20 :setText;
+        %tmp.22 = self;
+        symbol [ formatSpeed %tmp.23 184 35 46 ];
+        %tmp.23 = getv function %tmp.22 :formatSpeed;
+        symbol [ _maxSpeed %tmp.25 184 47 56 ];
+        %tmp.25 = getv ? :_maxSpeed;
+        %tmp.26 = invoke %tmp.22 %tmp.23(%tmp.25);
+        invoke %tmp.20 %tmp.21(%tmp.26);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_36_185_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_8_185_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_183_8_185_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 186 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_8_188_8_if_stmt:
+        symbol [ _distanceLabel %tmp.28 186 12 26 ];
+        %tmp.28 = getv ? :_distanceLabel;
+        %tmp.29 = null;
+        %tmp.30 = ne %tmp.28 %tmp.29;
+        bf %tmp.30 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_8_188_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_8_188_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_36_188_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 187 12 ]
+        symbol [ _distanceLabel %tmp.32 187 12 26 ];
+        %tmp.32 = getv ? :_distanceLabel;
+        %tmp.33 = as %tmp.32 { (!Null) };
+        symbol [ setText %tmp.34 187 27 34 ];
+        %tmp.34 = getv function %tmp.33 :setText;
+        %tmp.35 = self;
+        symbol [ formatDistance %tmp.36 187 35 49 ];
+        %tmp.36 = getv function %tmp.35 :formatDistance;
+        symbol [ _distance %tmp.38 187 50 59 ];
+        %tmp.38 = getv ? :_distance;
+        %tmp.39 = invoke %tmp.35 %tmp.36(%tmp.38);
+        invoke %tmp.33 %tmp.34(%tmp.39);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_36_188_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_8_188_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_186_8_188_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 189 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_8_191_8_if_stmt:
+        symbol [ _timeLabel %tmp.41 189 12 22 ];
+        %tmp.41 = getv ? :_timeLabel;
+        %tmp.42 = null;
+        %tmp.43 = ne %tmp.41 %tmp.42;
+        bf %tmp.43 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_8_191_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_8_191_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_32_191_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 190 12 ]
+        symbol [ _timeLabel %tmp.45 190 12 22 ];
+        %tmp.45 = getv ? :_timeLabel;
+        %tmp.46 = as %tmp.45 { (!Null) };
+        symbol [ setText %tmp.47 190 23 30 ];
+        %tmp.47 = getv function %tmp.46 :setText;
+        %tmp.48 = self;
+        symbol [ formatTime %tmp.49 190 31 41 ];
+        %tmp.49 = getv function %tmp.48 :formatTime;
+        symbol [ _elapsedTime %tmp.51 190 42 54 ];
+        %tmp.51 = getv ? :_elapsedTime;
+        %tmp.52 = invoke %tmp.48 %tmp.49(%tmp.51);
+        invoke %tmp.46 %tmp.47(%tmp.52);
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_32_191_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_8_191_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_189_8_191_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 192 8 ]
+        symbol [ WatchUi %tmp.53 192 8 15 ];
+        %tmp.53 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.54 192 16 29 ];
+        %tmp.54 = getv function %tmp.53 :requestUpdate;
+        invoke %tmp.53 %tmp.54();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_179_45_193_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 196; @symbol_functiondef = [formatSpeed,196,21,32]; @symbol_param<0> = [speed,196,33,38]; @symbol_param<0>_type<0> = [Float,196,42,47]; @symbol_return<0> = [String,196,52,58]; ]
+    private
+    function formatSpeed(speed as Float) as String {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_196_59_198_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 197 8 ]
+        %tmp.1 = lgetv %speed;
+        symbol [ speed %tmp.1 197 15 20 ];
+        symbol [ format %tmp.2 197 21 27 ];
+        %tmp.2 = getv function %tmp.1 :format;
+        %tmp.3 = "%.1f";
+        %tmp.4 = invoke %tmp.1 %tmp.2(%tmp.3);
+        ret %tmp.4;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_196_59_198_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 201; @symbol_functiondef = [formatDistance,201,21,35]; @symbol_param<0> = [distance,201,36,44]; @symbol_param<0>_type<0> = [Float,201,48,53]; @symbol_return<0> = [String,201,58,64]; ]
+    private
+    function formatDistance(distance as Float) as String {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_201_65_203_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 202 8 ]
+        %tmp.1 = lgetv %distance;
+        symbol [ distance %tmp.1 202 15 23 ];
+        symbol [ format %tmp.2 202 24 30 ];
+        %tmp.2 = getv function %tmp.1 :format;
+        %tmp.3 = "%.2f";
+        %tmp.4 = invoke %tmp.1 %tmp.2(%tmp.3);
+        ret %tmp.4;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_201_65_203_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 206; @symbol_functiondef = [formatTime,206,21,31]; @symbol_param<0> = [seconds,206,32,39]; @symbol_param<0>_type<0> = [Float,206,43,48]; @symbol_return<0> = [String,206,53,59]; ]
+    private
+    function formatTime(seconds as Float) as String {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 207 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_stop" ]
+        %totalSeconds.1 = local;
+        symbol [ totalSeconds %totalSeconds.1 207 12 24 ];
+        %tmp.1 = lgetv %seconds;
+        symbol [ seconds %tmp.1 207 27 34 ];
+        symbol [ toNumber %tmp.2 207 35 43 ];
+        %tmp.2 = getv function %tmp.1 :toNumber;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %totalSeconds.1 %tmp.3;
+        symbol [ totalSeconds %totalSeconds.1 207 12 24 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 208 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_stop" ]
+        %minutes.2 = local;
+        symbol [ minutes %minutes.2 208 12 19 ];
+        %tmp.4 = lgetv %totalSeconds.1;
+        symbol [ totalSeconds %tmp.4 208 22 34 ];
+        %tmp.5 = 60;
+        %tmp.6 = div %tmp.4 %tmp.5;
+        lputv %minutes.2 %tmp.6;
+        symbol [ minutes %minutes.2 208 12 19 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 209 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_stop" ]
+        %secs.3 = local;
+        symbol [ secs %secs.3 209 12 16 ];
+        %tmp.7 = lgetv %totalSeconds.1;
+        symbol [ totalSeconds %tmp.7 209 19 31 ];
+        %tmp.8 = 60;
+        %tmp.9 = mod %tmp.7 %tmp.8;
+        lputv %secs.3 %tmp.9;
+        symbol [ secs %secs.3 209 12 16 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc" 210 8 ]
+        %tmp.10 = lgetv %minutes.2;
+        symbol [ minutes %tmp.10 210 15 22 ];
+        symbol [ format %tmp.11 210 23 29 ];
+        %tmp.11 = getv function %tmp.10 :format;
+        %tmp.12 = "%d";
+        %tmp.13 = invoke %tmp.10 %tmp.11(%tmp.12);
+        %tmp.14 = ":";
+        %tmp.15 = add %tmp.13 %tmp.14;
+        %tmp.16 = lgetv %secs.3;
+        symbol [ secs %tmp.16 210 44 48 ];
+        symbol [ format %tmp.17 210 49 55 ];
+        %tmp.17 = getv function %tmp.16 :format;
+        %tmp.18 = "%02d";
+        %tmp.19 = invoke %tmp.16 %tmp.17(%tmp.18);
+        %tmp.20 = add %tmp.15 %tmp.19;
+        ret %tmp.20;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfView_mc_206_60_211_4_stop:
+    }
+}
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfView.mc"; @line = 1; ]
+<init> {
+}

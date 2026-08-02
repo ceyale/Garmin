@@ -1,7 +1,7 @@
 import Toybox.Graphics;
 import Toybox.Lang;
+import Toybox.Math;
 import Toybox.Position;
-import Toybox.Sensor;
 import Toybox.System;
 import Toybox.Time;
 import Toybox.Timer;
@@ -50,10 +50,8 @@ class windsurfView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        // Enable position and sensor updates
+        // Enable position updates
         Position.enableLocationEvents(Position.LOCATION_CONTINUOUS, method(:onPosition));
-        Sensor.setEnabledSensors(Sensor.SENSOR_ACCELEROMETER);
-        Sensor.enableSensorEvents(method(:onSensor));
 
         // Start a timer to update the display every second
         _timer = new Timer.Timer();
@@ -74,8 +72,7 @@ class windsurfView extends WatchUi.View {
             _timer.stop();
             _timer = null;
         }
-        Position.enableLocationEvents(Position.LOCATION_OFF, method(:onPosition));
-        Sensor.setEnabledSensors(Sensor.SENSOR_OFF);
+        Position.enableLocationEvents(Position.LOCATION_DISABLE, method(:onPosition));
     }
 
     // Position callback - called when GPS position updates
@@ -98,12 +95,9 @@ class windsurfView extends WatchUi.View {
             }
         }
 
-        // Calculate distance from last position
+        // Calculate distance from last position using haversine formula
         if (_lastPosition != null) {
-            var distance = _lastPosition.distanceTo(loc);
-            if (distance != null) {
-                _distance += distance.toFloat() / 1000.0; // meters to km
-            }
+            _distance += calculateDistance(_lastPosition, loc);
         }
         _lastPosition = loc;
 
@@ -116,11 +110,6 @@ class windsurfView extends WatchUi.View {
         updateDisplay();
     }
 
-    // Sensor callback - for future use (e.g., accelerometer data)
-    function onSensor(sensorInfo as Sensor.Info) as Void {
-        // Reserved for future sensor features
-    }
-
     // Timer callback - update display every second
     function onTimer() as Void {
         if (_sessionActive) {
@@ -130,6 +119,24 @@ class windsurfView extends WatchUi.View {
             }
             updateDisplay();
         }
+    }
+
+    // Calculate distance between two locations in km using haversine formula
+    private function calculateDistance(loc1 as Position.Location, loc2 as Position.Location) as Float {
+        var lat1 = loc1.toRadians()[0].toFloat();
+        var lon1 = loc1.toRadians()[1].toFloat();
+        var lat2 = loc2.toRadians()[0].toFloat();
+        var lon2 = loc2.toRadians()[1].toFloat();
+
+        var earthRadiusKm = 6371.0;
+        var dLat = (lat2 - lat1).toDouble();
+        var dLon = (lon2 - lon1).toDouble();
+
+        var a = (Math.sin(dLat / 2.0) * Math.sin(dLat / 2.0)) +
+                (Math.cos(lat1.toDouble()) * Math.cos(lat2.toDouble()) *
+                 Math.sin(dLon / 2.0) * Math.sin(dLon / 2.0));
+        var c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1.0 - a));
+        return (earthRadiusKm * c).toFloat();
     }
 
     // Start a new session

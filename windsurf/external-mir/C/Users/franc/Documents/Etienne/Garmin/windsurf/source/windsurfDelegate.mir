@@ -1,0 +1,160 @@
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [WatchUi,2,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 4; @symbol_classdef = [windsurfDelegate,4,6,22]; @symbol_extends<0> = [WatchUi,4,31,38]; @symbol_extends<1> = [BehaviorDelegate,4,39,55]; ]
+class windsurfDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 6; @symbol_functiondef = [initialize,6,13,23]; ]
+    function initialize() as Void {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_6_26_8_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 7 8 ]
+        symbol [ BehaviorDelegate %tmp.2 7 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 7 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_6_26_8_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 10; @symbol_functiondef = [onMenu,10,13,19]; @symbol_return<0> = [Boolean,10,25,32]; ]
+    function onMenu() as Boolean {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_10_33_13_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 11 8 ]
+        symbol [ WatchUi %tmp.1 11 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ pushView %tmp.2 11 16 24 ];
+        %tmp.2 = getv function %tmp.1 :pushView;
+        symbol [ Rez %tmp.6 11 29 32 ];
+        %tmp.6 = getv ? :Rez;
+        symbol [ Menus %tmp.7 11 33 38 ];
+        %tmp.7 = getv %tmp.6 :Menus;
+        symbol [ MainMenu %tmp.8 11 39 47 ];
+        %tmp.8 = getv function ? %tmp.7 :MainMenu;
+        %tmp.3 = newc %tmp.8 ();
+        symbol [ windsurfMenuDelegate %tmp.12 11 55 75 ];
+        %tmp.12 = getv ? :windsurfMenuDelegate;
+        %tmp.9 = newc %tmp.12 ();
+        symbol [ WatchUi %tmp.13 11 79 86 ];
+        %tmp.13 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_UP %tmp.14 11 87 95 ];
+        %tmp.14 = getv %tmp.13 :SLIDE_UP;
+        invoke %tmp.1 %tmp.2(%tmp.3, %tmp.9, %tmp.14);
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 12 8 ]
+        %tmp.15 = true;
+        ret %tmp.15;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_10_33_13_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 16; @symbol_functiondef = [onSelect,16,13,21]; @symbol_return<0> = [Boolean,16,27,34]; ]
+    function onSelect() as Boolean {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_16_35_23_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 17 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_16_35_23_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_16_35_23_4_stop" ]
+        %view.1 = local;
+        symbol [ view %view.1 17 12 16 ];
+        symbol [ WatchUi %tmp.1 17 19 26 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ getCurrentView %tmp.2 17 27 41 ];
+        %tmp.2 = getv function %tmp.1 :getCurrentView;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %view.1 %tmp.3;
+        symbol [ view %view.1 17 12 16 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 18 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_8_21_8_if_stmt:
+        %tmp.4 = lgetv %view.1;
+        symbol [ view %tmp.4 18 12 16 ];
+        %tmp.5 = 0;
+        %tmp.6 = agetv %tmp.4 %tmp.5;
+        symbol [ windsurfView %tmp.8 18 31 43 ];
+        %tmp.8 = getv ? :windsurfView;
+        %tmp.9 = isa %tmp.6 %tmp.8;
+        bf %tmp.9 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_8_21_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_8_21_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_45_21_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 19 12 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_45_21_8_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_45_21_8_stop" ]
+        %windsurfViewObj.2 = local;
+        symbol [ windsurfViewObj %windsurfViewObj.2 19 16 31 ];
+        %tmp.10 = lgetv %view.1;
+        symbol [ view %tmp.10 19 34 38 ];
+        %tmp.11 = 0;
+        %tmp.12 = agetv %tmp.10 %tmp.11;
+        %tmp.13 = as %tmp.12 windsurfView;
+        symbol [ windsurfView %tmp.13 19 45 57 ];
+        lputv %windsurfViewObj.2 %tmp.13;
+        symbol [ windsurfViewObj %windsurfViewObj.2 19 16 31 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 20 12 ]
+        %tmp.14 = lgetv %windsurfViewObj.2;
+        symbol [ windsurfViewObj %tmp.14 20 12 27 ];
+        symbol [ startSession %tmp.15 20 28 40 ];
+        %tmp.15 = getv function %tmp.14 :startSession;
+        invoke %tmp.14 %tmp.15();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_45_21_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_8_21_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_18_8_21_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 22 8 ]
+        %tmp.16 = true;
+        ret %tmp.16;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_16_35_23_4_stop:
+    }
+    [ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 26; @symbol_functiondef = [onBack,26,13,19]; @symbol_return<0> = [Boolean,26,25,32]; ]
+    function onBack() as Boolean {
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_26_33_33_4_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 27 8 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_26_33_33_4_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_26_33_33_4_stop" ]
+        %view.1 = local;
+        symbol [ view %view.1 27 12 16 ];
+        symbol [ WatchUi %tmp.1 27 19 26 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ getCurrentView %tmp.2 27 27 41 ];
+        %tmp.2 = getv function %tmp.1 :getCurrentView;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %view.1 %tmp.3;
+        symbol [ view %view.1 27 12 16 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 28 8 ]
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_8_31_8_if_stmt:
+        %tmp.4 = lgetv %view.1;
+        symbol [ view %tmp.4 28 12 16 ];
+        %tmp.5 = 0;
+        %tmp.6 = agetv %tmp.4 %tmp.5;
+        symbol [ windsurfView %tmp.8 28 31 43 ];
+        %tmp.8 = getv ? :windsurfView;
+        %tmp.9 = isa %tmp.6 %tmp.8;
+        bf %tmp.9 @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_8_31_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_8_31_8_if_true:
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_45_31_8_start:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 29 12 ]
+        [ "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_45_31_8_start" "C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_45_31_8_stop" ]
+        %windsurfViewObj.2 = local;
+        symbol [ windsurfViewObj %windsurfViewObj.2 29 16 31 ];
+        %tmp.10 = lgetv %view.1;
+        symbol [ view %tmp.10 29 34 38 ];
+        %tmp.11 = 0;
+        %tmp.12 = agetv %tmp.10 %tmp.11;
+        %tmp.13 = as %tmp.12 windsurfView;
+        symbol [ windsurfView %tmp.13 29 45 57 ];
+        lputv %windsurfViewObj.2 %tmp.13;
+        symbol [ windsurfViewObj %windsurfViewObj.2 29 16 31 ];
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 30 12 ]
+        %tmp.14 = lgetv %windsurfViewObj.2;
+        symbol [ windsurfViewObj %tmp.14 30 12 27 ];
+        symbol [ stopSession %tmp.15 30 28 39 ];
+        %tmp.15 = getv function %tmp.14 :stopSession;
+        invoke %tmp.14 %tmp.15();
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_45_31_8_stop:
+        goto @C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_8_31_8_if_end;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_28_8_31_8_if_end:
+[ "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc" 32 8 ]
+        %tmp.16 = true;
+        ret %tmp.16;
+C__Users_franc_Documents_Etienne_Garmin_windsurf_source_windsurfDelegate_mc_26_33_33_4_stop:
+    }
+}
+[ @file = "C:\Users\franc\Documents\Etienne\Garmin\windsurf\source\windsurfDelegate.mc"; @line = 1; ]
+<init> {
+}
