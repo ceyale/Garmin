@@ -22,7 +22,8 @@ A GPS session tracker for windsurfing on Garmin Connect IQ devices.
 build.bat
 ```
 
-This compiles the app for the Forerunner 745 (fr745) and outputs `windsurf.prg`.
+This compiles the app for the Forerunner 745 (fr745) and outputs `windsurf.prg`
+Soon in Connect IQ store
 
 ## Requirements
 
