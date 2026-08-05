@@ -175,7 +175,7 @@ class windsurfView extends WatchUi.View {
     private function drawHeader(dc as Dc, centerX as Number) as Void {
         // Title
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(centerX, 10, Graphics.FONT_XTINY, LoadString(Rez.Strings.AppName), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, 10, Graphics.FONT_XTINY, WatchUi.loadResource(Rez.Strings.AppName) as String, Graphics.TEXT_JUSTIFY_CENTER);
 
         // GPS indicator (top right)
         var gpsColor = _gpsLocked ? Graphics.COLOR_GREEN : Graphics.COLOR_DK_GRAY;
@@ -199,7 +199,7 @@ class windsurfView extends WatchUi.View {
     // Draw the big current speed and unit
     private function drawSpeed(dc as Dc, centerX as Number) as Void {
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(centerX, 55, Graphics.FONT_NUMBER_LARGE, formatSpeed(_currentSpeed), Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, 55, Graphics.FONT_NUMBER_HOT, formatSpeed(_currentSpeed), Graphics.TEXT_JUSTIFY_CENTER);
 
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         dc.drawText(centerX, 110, Graphics.FONT_XTINY, "km/h", Graphics.TEXT_JUSTIFY_CENTER);
@@ -258,12 +258,12 @@ class windsurfView extends WatchUi.View {
     // Status helpers
     private function getStatusText() as String {
         if (_sessionActive) {
-            return LoadString(Rez.Strings.status_active);
+            return WatchUi.loadResource(Rez.Strings.status_active) as String;
         }
         if (_sessionStarted) {
-            return LoadString(Rez.Strings.status_stopped);
+            return WatchUi.loadResource(Rez.Strings.status_stopped) as String;
         }
-        return LoadString(Rez.Strings.status_ready);
+        return WatchUi.loadResource(Rez.Strings.status_ready) as String;
     }
 
     private function getStatusColor() as Number {
