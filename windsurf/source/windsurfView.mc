@@ -18,12 +18,20 @@ class windsurfView extends WatchUi.View {
     private var _startTime as Time.Moment?;
     private var _elapsedTime as Float = 0.0;
     private var _currentSpeed as Float = 0.0;
+    private var _smoothedSpeed as Float = 0.0;
     private var _maxSpeed as Float = 0.0;
     private var _distance as Float = 0.0;
     private var _lastPosition as Position.Location?;
+    private var _lastFixTime as Time.Moment?;
 
     // Timer for periodic updates
     private var _timer as Timer.Timer?;
+
+    // GPS accuracy tuning
+    private const _MAX_ACCURACY = 25.0;      // meters - reject fixes worse than this
+    private const _MIN_DISTANCE_M = 3.0;     // meters - minimum movement to count (jitter filter)
+    private const _SPEED_SMOOTHING = 0.3;    // EMA factor - higher = more responsive, lower = smoother
+    private const _MAX_SPEED_JUMP = 15.0;    // km/h - max speed change per fix (spike filter)
 
     // GUI layout constants
     private const _SPEED_BAR_MAX = 60.0;
@@ -82,18 +90,42 @@ class windsurfView extends WatchUi.View {
             return;
         }
 
+        // GPS accuracy gating - reject poor fixes
+        if (info has :accuracy && info.accuracy != null) {
+            if (info.accuracy.toFloat() > _MAX_ACCURACY) {
+                return;
+            }
+        }
+
+        // Speed smoothing with spike filter
         var speed = info.speed;
         if (speed != null) {
-            _currentSpeed = speed.toFloat() * 3.6;
+            var rawSpeed = speed.toFloat() * 3.6;
+            // Spike filter - reject implausible speed jumps
+            var speedDiff = rawSpeed - _smoothedSpeed;
+            if (speedDiff < 0.0) {
+                speedDiff = -speedDiff;
+            }
+            if (_smoothedSpeed > 0.0 && speedDiff > _MAX_SPEED_JUMP) {
+                rawSpeed = _smoothedSpeed;
+            }
+            // Exponential moving average
+            _smoothedSpeed = (_smoothedSpeed * (1.0 - _SPEED_SMOOTHING)) + (rawSpeed * _SPEED_SMOOTHING);
+            _currentSpeed = _smoothedSpeed;
             if (_currentSpeed > _maxSpeed) {
                 _maxSpeed = _currentSpeed;
             }
         }
 
+        // Distance with jitter filter - only count movement above noise threshold
         if (_lastPosition != null) {
-            _distance += calculateDistance(_lastPosition, loc);
+            var segmentDistance = calculateDistance(_lastPosition, loc) * 1000.0; // km to m
+            if (segmentDistance >= _MIN_DISTANCE_M) {
+                _distance += segmentDistance / 1000.0;
+            }
         }
         _lastPosition = loc;
+        _lastFixTime = Time.now();
 
         var now = Time.now();
         if (_startTime != null) {
@@ -138,8 +170,10 @@ class windsurfView extends WatchUi.View {
         _sessionStarted = true;
         _startTime = Time.now();
         _lastPosition = null;
+        _lastFixTime = null;
         _elapsedTime = 0.0;
         _currentSpeed = 0.0;
+        _smoothedSpeed = 0.0;
         _maxSpeed = 0.0;
         _distance = 0.0;
         updateDisplay();
@@ -157,8 +191,10 @@ class windsurfView extends WatchUi.View {
         _sessionStarted = false;
         _startTime = null;
         _lastPosition = null;
+        _lastFixTime = null;
         _elapsedTime = 0.0;
         _currentSpeed = 0.0;
+        _smoothedSpeed = 0.0;
         _maxSpeed = 0.0;
         _distance = 0.0;
         updateDisplay();
